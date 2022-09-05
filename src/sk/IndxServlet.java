@@ -5,7 +5,7 @@ import javax.servlet.annotation.*;
 import javax.servlet.*;
 import java.io.*;
 import java.util.*;
- 
+import java.util.stream.*;
 
 @WebServlet( urlPatterns={"/api/add", "/api/delete", "/api/get"})
 public class IndxServlet extends HttpServlet {
@@ -45,6 +45,7 @@ dtPrts[2] ) );
 		Collections.sort( invntry.rmndrs, ( RmndrBean r1, RmndrBean r2 ) -> { 
 			return r1.getEvntDt().before( r2.getEvntDt() )?-1:1;
 		});
+		invntry.rmndrs = invntry.rmndrs.stream().filter( rmndr -> rmndr.getEvntDt().getTime() > new Date().getTime() ).collect( Collectors.toList());
 		rspns.setContentType( "text/xml"); 
 		rspns.getWriter().println( Utils.marshall( invntry ) );
 	}

@@ -53,7 +53,9 @@ function crtRmndrs( ) {
 function addRmndr( frmElmnt) {
 	var itmCntnt = frmElmnt.itmCntnt.value, evntDt = frmElmnt.evntDt.value;
 
-	sndRqst( hndlDlt, "POST", "api/add?itmCntnt=" + itmCntnt + "&evntDt=" + evntDt );
+	if( frmValid )
+		sndRqst( hndlDlt, "POST", "api/add?itmCntnt=" + itmCntnt + "&evntDt=" + evntDt );
+	else alert( "The form is invalid" );
 }
 
 function hndlDlt() {
@@ -67,6 +69,7 @@ function vldtDt( self ) {
 parseInt(dtPrts[2] ) );
 	var mscndsPrDy = 1000 * 60 * 60 * 24, drtn = (slctdDt.getTime() - new Date().getTime() ) / mscndsPrDy;	
 
+	console.log( "duration is ", drtn );
 	if( drtn <= -1 ) {
 		frmValid = false;
 		document.getElementById( "dt-errr" ).style.display = "block";
