@@ -7,7 +7,7 @@ import java.io.*;
  
 
 class Utils {
-	public static String marshall( Object jaxbObject ) {
+	public static String marshal( Object jaxbObject ) {
 		try {
 		String otpt = "otpt.xml";
 		PrintWriter pw = new PrintWriter(otpt);
