@@ -1,0 +1,80 @@
+body {
+	width: 728px;
+	margin: auto;
+	font-size: 1.5em;
+	background: linear-gradient( #aaa, #ccc );
+	font-family: Consolas;
+}
+
+body * {
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+}
+
+textarea {
+	height: 10em;
+	font-size: 1.2em;
+}
+
+#dt-errr {
+	color: red;
+	display: none;
+}
+
+input {
+	line-height: 2em;
+	margin-top : 20px;
+}
+
+button {
+	background-color: gray;
+	padding: 0.5em 0.5em;
+	font-size: 1.25em;
+}
+
+button:before {
+	content : "+";
+	padding: 0.25em 0.25em;
+	background-color: #2f2;
+	color: white;
+	border-radius: 999px;
+	display: inline-block;
+	width: 1.2em;
+	height: 1.2em;
+	margin-right: .3em;
+}
+
+tr td:nth-child(1) {
+	width: 70%;
+}
+
+tr td:nth-child(2) {
+	width: 20%;
+}
+
+tr td:nth-child(3) {
+	width: 10%;
+}
+
+tr td:nth-child(3):hover {
+	background-color: rgba( 150, 150, 255, 0.5 );
+}
+
+td {
+	padding: 0.5em;
+}
+
+table {
+	background-color: slategray;
+}
+
+table:hover {
+	background-color: rgba( 255, 150, 150, 0.5);
+}
+
+@media screen and ( max-width: 768px ) {
+	body {
+		width: 450px;
+	}
+}

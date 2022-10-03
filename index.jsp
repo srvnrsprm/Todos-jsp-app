@@ -6,7 +6,7 @@
 <html>
   <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="styles.css" rel="stylesheet" type="text/css">
+	<link href="assets/styles.css" rel="stylesheet" type="text/css">
   </head>
   <body>
 		<h1> Shop Bill</h1>
@@ -21,12 +21,12 @@
 			<table><tbody>
 					<tr><td rowspan=2>${rmndr.itmCntnt}</td>
 						<td style="border-bottom:yellow 2px solid"><fmt:formatDate value="${rmndr.evntDt}" pattern="dd MMM yyyy"></fmt:formatDate></td>
-						<td id=${status.count} onClick="dltRmndr( ${status.count} )">&nbsp;&nbsp;&nbsp;x&nbsp;&nbsp;&nbsp;</td>
+						<td id=${status.count} onClick="dltRmndr( ${status.count} )">&nbsp;&nbsp;x&nbsp;&nbsp;</td>
 					</tr>
 					<tr><td><sk:drtn dt="${rmndr.evntDt}"></sk:drtn></td></tr>
 			</tbody></table>
 			</c:forEach> 
 		</div>
   </body>
-	<script src="app.js"></script>
+	<script src="assets/app.js"></script>
 </html> 
