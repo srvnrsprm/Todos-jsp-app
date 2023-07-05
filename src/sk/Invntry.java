@@ -1,10 +1,11 @@
 package sk;
 
+import java.io.*; 
 import java.util.*;
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement
-public class Invntry {
+public class Invntry implements Serializable {
 
 	@XmlElement(name="rmndr")
 	public List<RmndrBean> rmndrs = new ArrayList<RmndrBean>();

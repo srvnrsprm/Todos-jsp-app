@@ -1,0 +1,71 @@
+<project name="shopbill" default="test">
+
+	<target name="init">
+		<delete dir="build" />
+		<delete dir="dist" />
+    <mkdir dir="build/classes" />
+		<mkdir dir="build/test/classes/data" />
+		<mkdir dir="dist" />
+	</target>
+
+	<path id="compile.classpath">
+		<fileset dir="WEB-INF/lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<path id="testcompile.classpath">
+		<path location="build/classes" />
+		<path refid="compile.classpath" />
+	</path>
+
+	<path id="testrun.classpath">
+		<path location="build/test/classes" />
+		<path refid="testcompile.classpath" />
+	</path>
+
+	<target name="compile" depends="init">
+		<javac srcdir="src" destdir="build/classes" includeantruntime="false">
+			<classpath refid="compile.classpath" />
+		</javac>
+		<copy todir="WEB-INF/classes">
+			<fileset dir="build/classes" includes="**/*.class" />
+		</copy>
+	</target>
+
+	<target name="test-compile" depends="compile">
+		<javac srcdir="test" destdir="build/test/classes" includeantruntime="false">
+			<classpath refid="testcompile.classpath" />
+		</javac>
+	</target>
+
+	<target name="archive" depends="test-compile">
+		<jar destfile="dist/shopbill.jar" basedir="build/classes" />
+	</target>
+
+	<target name="test" depends="archive">
+		<junit printsummary="true">
+			<classpath refid="testrun.classpath" />
+			<formatter type="xml"/>
+			<batchtest todir="build/test/classes/data">
+				<fileset dir="build/test/classes" includes="**/Test*.class"/>
+			</batchtest>
+		</junit>	
+		<!-- <junitreport todir="build/test/classes/data">
+			<fileset dir="build/test/classes/data">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="build/test/classes/reports" />
+		</junitreport> -->
+	</target>
+
+	<target name="javadocs" depends="compile">
+		<javadoc access="private" sourcepath="src" packagenames="sk.*" use="true" version="true" windowtitle="${ant.project.name}" failonerror="true" destdir="docs" >
+			<classpath refid="testrun.classpath" />
+		</javadoc>
+	</target>
+
+	<!-- <target name="scp-to-srvr" depends="compile">
+		<scp remoteToDir="" keyfile="/home/sk/.ssh/skKey.pem">
+			<fileset  -->
+</project>

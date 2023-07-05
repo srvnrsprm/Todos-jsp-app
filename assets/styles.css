@@ -1,18 +1,21 @@
 body {
-	width: 728px;
-	margin: auto;
 	font-size: 1.5em;
-	background: linear-gradient( #aaa, #ccc );
+	background: rgb(217, 223, 248); /*rgb(244, 247, 255); linear-gradient( #aaa, #ccc );*/
 	font-family: Consolas;
+	height: 100vh;
+	padding: 0 25px;
 }
 
-body * {
-	width: 100%;
-	text-align: center;
+form * {
+	justify-content: center;
+	align-content: center;
+}
+
+form, table, button {
 	margin-top: 20px;
 }
 
-textarea {
+textarea.main {
 	height: 10em;
 	font-size: 1.2em;
 }
@@ -27,13 +30,13 @@ input {
 	margin-top : 20px;
 }
 
-button {
-	background-color: gray;
+#submit {
+	background-color: rgb(233, 249, 244);/* gray;*/
 	padding: 0.5em 0.5em;
 	font-size: 1.25em;
 }
 
-button:before {
+#submit:before {
 	content : "+";
 	padding: 0.25em 0.25em;
 	background-color: #2f2;
@@ -45,36 +48,91 @@ button:before {
 	margin-right: .3em;
 }
 
-tr td:nth-child(1) {
-	width: 70%;
+table.rslt tr td:nth-child(1) {
+	width: 60%;
 }
 
-tr td:nth-child(2) {
-	width: 20%;
+table.rslt tr td:nth-child(2) {
+	width: 25%;
 }
 
-tr td:nth-child(3) {
-	width: 10%;
+table.rslt tr td:nth-child(3) {
+	width: 15%;
 }
 
-tr td:nth-child(3):hover {
+table.rslt tr td:last-child:hover {
 	background-color: rgba( 150, 150, 255, 0.5 );
 }
 
 td {
-	padding: 0.5em;
+	vertical-align: middle;
 }
 
-table {
-	background-color: slategray;
+table.rslt {
+	background-color: rgb(231, 232, 216); /*slategray;*/
+	table-layout: fixed;
+	padding: .3em;
 }
 
 table:hover {
 	background-color: rgba( 255, 150, 150, 0.5);
 }
 
+table.stts td:nth-child(1) {
+	width: 90%;
+}
+
+table.stts td:nth-child(2) {
+	width: 10%;
+}
+div.notify {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
 @media screen and ( max-width: 768px ) {
-	body {
-		width: 450px;
+	.container {
+		display: flex;
+		flex-wrap: wrap;
 	}
+}
+
+.notify {
+	position: absolute;
+	top: 10px;
+	width: 350px;
+	overflow-x: hidden;
+}
+
+.notify:empty {
+	visibility: hidden;
+}
+
+.notify table {
+	width: 100%;
+	margin: 10px;
+	background-color: rgba(150, 80, 234, 0.4);
+}
+
+.notify table tr td:last-child {
+	font-weight: 600;
+	font-size: x-large;
+}
+
+.container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.col1, .col2 {
+	width: 400px;
+	border: 2px solid black;
+	padding-left: 20px;
+}
+
+.col1 h2, .col2 h2 {
+	margin-top: 0px;
+	margin-left: -20px;
+	background: khaki;
 }

@@ -5,42 +5,42 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.*;
 import java.util.*;
- 
-class Utils {
+
+/**
+	* This is the utility class that converts a date argument into a duration string.
+	* @author Sk
+	* @version 1.0
+*/
+public class Utils {
+	/**
+		* This method returns the duration string for the passed date argument
+		* @param Date The date whose duration from today needs to be calculated
+		* @return String date converted to interval string
+	*/
 	public static String clcDrtn( Date dtVl ) {
-  	float drtn = (dtVl.getTime() - new Date().getTime()) / 1000, nmbr=0;
- 	 	float drtnInDays = drtn / (60 * 60 * 24 );
+		long evntDt = (dtVl.getTime() + new GregorianCalendar( 1970, 0, 1).getTimeZone().getRawOffset()) / (1000 * 60 * 60 * 24);
+		long todayDt = (long)Math.floor( new Date().getTime() + new GregorianCalendar( 1970, 0, 1).getTimeZone().getRawOffset() )/ (1000 * 60 * 60 * 24);
+  	long drtnInDays = evntDt - todayDt, nmbr=0;
 		String sffx="";
 
-		if( Math.ceil( drtnInDays ) == 1 ) {
-			sffx = "day";
-		} else if( drtnInDays > 1 ) {
-			if( Math.ceil( drtnInDays/30) ==  1 ) {
-				sffx = "month";
-			} else if( drtnInDays/30 > 1 ) {
-				if( Math.ceil(drtnInDays/360) == 1 ) {
-					sffx = "year";
-				} else if( drtnInDays/360 > 1 ) {
-					sffx = "years";
-				} else {
-				sffx = "months";
-				}
-			} else {
-				sffx = "days";
-			}
-		}
-		if( sffx.indexOf( "day" ) >= 0 ) {
-			nmbr = drtnInDays;
-		} else if( sffx.indexOf( "month" ) >= 0 ) {
-    	nmbr = drtnInDays / 30;
-  	} else if( sffx.indexOf( "year" ) >= 0 ) {
+		if( drtnInDays >= 365 ) {
+			if( drtnInDays == 365 ) sffx = "year";
+			else sffx = "years";
     	nmbr = drtnInDays / 365;
-  	}
+		} else if( drtnInDays >= 30 ) {
+			if( drtnInDays == 30 ) sffx = "month";
+			else sffx = "months";
+    	nmbr = drtnInDays / 30;
+		} else {
+			if( drtnInDays == 1 ) sffx = "day";
+			else sffx = "days";
+			nmbr = drtnInDays;
+		}
 
-  	if( Math.floor( drtnInDays ) == -1 ) {
+  	if( drtnInDays==0 ) {
     	return "Just now";
   	} else {
-    	return (int)Math.ceil(nmbr) + " " + sffx + " to go";
+    	return nmbr + " " + sffx + " to go";
   	}
 	}
 }
