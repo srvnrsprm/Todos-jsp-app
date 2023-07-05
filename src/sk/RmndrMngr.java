@@ -18,7 +18,7 @@ class RmndrMngr {
 	public void initTbls() throws SQLException, NamingException {
 		initial = new InitialContext();
 		System.out.println( "Gonna lookup for the resource java:comp/env/jdbc/postgres" );
-		ds = (DataSource) initial.lookup( "java:comp/env/jdbc/jsprc2" );
+		ds = (DataSource) initial.lookup( "java:comp/env/jdbc/postgres" );
 		connection = ds.getConnection();
 		crtTblSttmnt = connection.prepareStatement( "CREATE TABLE IF NOT EXISTS RMNDR ( id serial PRIMARY KEY, itmcntnt varchar(100), evntdt date )" );
 		addRmndrSttmnt = connection.prepareStatement( "INSERT INTO RMNDR ( itmcntnt, evntdt ) values( ?, ? )" );

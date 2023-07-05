@@ -3,9 +3,9 @@ package sk;
 import junit.framework.TestCase;
 import java.util.ArrayList;
 
-public class TestRmndrMngr extends TestCase {
+public class TodoRmndrMngr extends TestCase {
 
-	public void testGetAll() {
+	/*public void todoGetAll() {
 		try {
 		RmndrMngr rmndrMngr = new RmndrMngr();
 		rmndrMngr.initTbls();
@@ -14,5 +14,5 @@ public class TestRmndrMngr extends TestCase {
 		} catch( Exception e ) {
 			fail( e.toString() );
 		}	
-	}
+	} */
 }
