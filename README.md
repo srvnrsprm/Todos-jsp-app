@@ -20,8 +20,9 @@ Tomcat server configuration:
           url="jdbc:postgresql://localhost:5432/$DB_NAME"
           username="$USERNAME" password="$PASSWORD" maxTotal="20" maxIdle="10" maxWaitMillis="-1"/>
 ```
+```Resource``` element must be put inside the root element, ```context```. And replace the placeholders, (```$DB_NAME```, ```$USERNAME```, ```$PASSWORD``` ) with local values. The value for name attribute above mentioned as ```jdbc/postgres``` is used as a lookup key inside the java code and it must remain the same.
    * Run ```ant``` inside the project folder. Ensure all unit tests pass, and see, the compiled files are placed under ```WEB-INF/classes``` folder
    * Now, start tomcat server & visit ```http://localhost:8080/shopBill/hmPg``` to play with it.
-  This resource element must be put inside the root element, ```context```. And replace the placeholders, (```$DB_NAME```, ```$USERNAME```, ```$PASSWORD``` ) with local values. The value for name attribute above mentioned as ```jdbc/postgres``` is used inside the java code and it must remain the same.
+  
 
 
