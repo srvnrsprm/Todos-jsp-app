@@ -5,6 +5,7 @@ $( "#evnt-dt" ).datepicker( {
 	autoSize: true,
 	showOn: "button",
  	buttonImage: "assets/calendar.png",
+  dateFormat: "dd/mm/yy"
 });
 $( "#submit" ).button();
 
@@ -13,7 +14,7 @@ function hndlSave() {
 	var txtAreaPrnt = $(this).closest( "tr" ).prev().children()[0];
 	$.ajax({ url: "api/update?itmCntnt=" + $(txtAreaPrnt).children()[0].value + "&evntId=" + $(this).attr( "data-id" ), 
 		type: "post",
-		success: hndlDlt,
+		success: loadRmndrs,
 		error: notifyErrr
 		});
 	$( this ).attr( "src", "assets/imgs/pencil.svg" );
@@ -32,19 +33,21 @@ $( ".edit" ).click( hndlEdit );
 function addRmndr( frmElmnt) {
 	var itmCntnt = frmElmnt.itmCntnt.value, evntDt = frmElmnt.evntDt.value;
 
-	if( itmCntnt && vldtDt( evntDt ) ) 
+	if( itmCntnt && vldtDt( evntDt ) ) {
 		$.ajax({ url: "api/add?itmCntnt=" + itmCntnt + "&evntDt=" + evntDt, 
 			type: "post", 
-			success: hndlDlt,
+			success: loadRmndrs,
 			error: notifyErrr
 		});
+    frmElmnt.reset();
+  }
 }
 
 function dltRmndr( id ) {
 	console.log( "dltRmndr function called" );
 	$.ajax({ url: "api/delete?evntId=" + id,
 		type: "post",
-		success: hndlDlt,
+		success: loadRmndrs,
 		error: notifyErrr
 	});
 }
@@ -67,7 +70,7 @@ function dltNotifyRow( elmnt) {
 	$( elmnt ).closest( "table" ).fadeOut( 5000 );
 }
 
-function hndlDlt( rspns ) {
+function loadRmndrs( rspns ) {
 	$.get( "api/get", null, function( rspns, stts ) {
 		var xsltProcessor = new XSLTProcessor();
 		xsltProcessor.importStylesheet( xsl );
@@ -80,7 +83,8 @@ function hndlDlt( rspns ) {
 }
 
 function vldtDt( inptDt ) {
-	var dtPrts = inptDt.split("/"), slctdDt = new Date( parseInt(dtPrts[2]), parseInt(dtPrts[0])-1, parseInt(dtPrts[1] ) );
+  console.log( "validate date, the input date is " + inptDt );
+	var dtPrts = inptDt.split("/"), slctdDt = new Date( parseInt(dtPrts[2]), parseInt(dtPrts[1])-1, parseInt(dtPrts[0] ) );
 	var mscndsPrDy = 1000 * 60 * 60 * 24, drtn = (slctdDt.getTime() - new Date().getTime() ) / mscndsPrDy;	
 
 	if( drtn <= -1 ) {
@@ -89,3 +93,6 @@ function vldtDt( inptDt ) {
 	} 
 	return true;
 }
+
+
+loadRmndrs();

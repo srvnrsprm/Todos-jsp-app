@@ -8,7 +8,7 @@ Languages / Frameworks used:
   * Java ( Java-XML bindings, JSP )
   * Apache Tomcat server
   * Postgresql DB
-  * Ant build tool (1.9)
+  * Ant build tool
   * JUnit testing framework
    
 Tomcat server configuration:

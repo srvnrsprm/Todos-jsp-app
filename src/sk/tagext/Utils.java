@@ -28,9 +28,9 @@ public class Utils {
 			else sffx = "years";
     	nmbr = drtnInDays / 365;
 		} else if( drtnInDays >= 30 ) {
-			if( drtnInDays == 30 ) sffx = "month";
-			else sffx = "months";
     	nmbr = drtnInDays / 30;
+			if( nmbr == 1 ) sffx = "month";
+			else sffx = "months";
 		} else {
 			if( drtnInDays == 1 ) sffx = "day";
 			else sffx = "days";

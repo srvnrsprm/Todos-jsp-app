@@ -59,13 +59,4 @@
 		</junitreport> -->
 	</target>
 
-	<target name="javadocs" depends="compile">
-		<javadoc access="private" sourcepath="src" packagenames="sk.*" use="true" version="true" windowtitle="${ant.project.name}" failonerror="true" destdir="docs" >
-			<classpath refid="testrun.classpath" />
-		</javadoc>
-	</target>
-
-	<!-- <target name="scp-to-srvr" depends="compile">
-		<scp remoteToDir="" keyfile="/home/sk/.ssh/skKey.pem">
-			<fileset  -->
 </project>

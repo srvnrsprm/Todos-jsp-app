@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.*;
 import java.sql.SQLException;
 
-@WebServlet( urlPatterns={"/api/add", "/api/delete", "/api/update", "/api/get", "/hmPg"})
+@WebServlet( urlPatterns={"/api/add", "/api/delete", "/api/update", "/api/get", "/hmPg", "/domPg"})
 public class IndxServlet extends HttpServlet {
 	Invntry invntry = new Invntry();
 	ServletContext applctn;
@@ -34,8 +34,18 @@ public class IndxServlet extends HttpServlet {
 			if( rqstURI.indexOf( "/api/add" ) >= 0 ) {
 				String itmCntnt = rqst.getParameter( "itmCntnt" );
 				String dtStrng = rqst.getParameter( "evntDt" );
-				String dtPrts[] = dtStrng.split( "/" );
-				Calendar c = new GregorianCalendar( Integer.parseInt(  dtPrts[2] ), Integer.parseInt( dtPrts[0] ) -1, Integer.parseInt(dtPrts[1] ) ); 
+        String dtPrts[];
+        Calendar c;
+
+        if( dtStrng.indexOf( '/' ) != -1 ) {
+          //this handles jquery ui date object's format dd/mm/yyyy        
+          dtPrts = dtStrng.split( "/" );
+          System.out.println( "dtStrng is " + dtStrng );
+				  c = new GregorianCalendar( Integer.parseInt(  dtPrts[2] ), Integer.parseInt( dtPrts[1] ) -1, Integer.parseInt(dtPrts[0] ) ); 
+        } else {
+          dtPrts = dtStrng.split("-");//dtStrng.split( "/" );
+          c = new GregorianCalendar( Integer.parseInt( dtPrts[0] ), Integer.parseInt( dtPrts[1] ) -1, Integer.parseInt( dtPrts[2] ) );
+        }
 				rmndrMngr.add( itmCntnt, c.getTime() );
 				rspns.setContentType( "text/plain" );
 				rspns.getWriter().println( "OK" );
@@ -64,8 +74,13 @@ public class IndxServlet extends HttpServlet {
 				rspns.getWriter().println( Utils.marshal( invntry ));
 			} else {
 				rqst.setAttribute( "invntry", invntry );
-				RequestDispatcher rd = getServletContext().getRequestDispatcher( "/index.jsp" );
-				rd.forward( rqst, rspns );
+        if( rqstURI.indexOf( "domPg" ) >= 0 ) {
+          RequestDispatcher rd = getServletContext().getRequestDispatcher( "/dom_index.jsp" );
+          rd.forward( rqst, rspns );
+        } else {
+          RequestDispatcher rd = getServletContext().getRequestDispatcher( "/index.jsp" );
+          rd.forward( rqst, rspns );
+        }
 			}
 		} catch( SQLException sqlEx ) {
 			throw new ServletException( sqlEx );

@@ -32,7 +32,7 @@
 			<c:forEach varStatus="status" var="rmndr" items="<%= invntry.getRmndrs() %>">
 			<div class="ui-widget">
 			<table cellpadding=1 cellspacing=3 class="rslt ui-state-highlight ui-corner-all"><tbody>
-					<tr>
+					<%-- <tr>
 						<td rowspan=2>${rmndr.itmCntnt}</td>
 						<td style="border-bottom:yellow 2px solid"><fmt:formatDate value="${rmndr.evntDt}" pattern="dd MMM yyyy"></fmt:formatDate></td>
 						<td id=${rmndr.id} onClick="dltRmndr( ${rmndr.id} )"><img src="assets/imgs/x.svg" width="20px" height="25px"/></td>
@@ -40,7 +40,7 @@
 					<tr>
 						<td><sk:drtn dt="${rmndr.evntDt}"></sk:drtn></td>
 						<td><img data-id=${rmndr.id} src="assets/imgs/pencil.svg" width="25px" height="25px" class="edit"/></td>
-					</tr>
+					</tr> --%>
 			</tbody></table>
 			</div>
 			</c:forEach> 
