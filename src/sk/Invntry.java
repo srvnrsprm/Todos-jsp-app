@@ -7,13 +7,13 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement
 public class Invntry implements Serializable {
 
-	@XmlElement(name="rmndr")
-	public List<RmndrBean> rmndrs = new ArrayList<RmndrBean>();
+    @XmlElement(name="rmndr")
+    public List<RmndrBean> rmndrs = new ArrayList<RmndrBean>();
 
-	public Invntry() {
-	}
+    public Invntry() {
+    }
 
-	public List<RmndrBean> getRmndrs() {
-		return this.rmndrs;
-	}
+    public List<RmndrBean> getRmndrs() {
+	return this.rmndrs;
+    }
 }
